@@ -1,5 +1,11 @@
 package by.itClass.model.db;
 
-public class ConnectionManager {
+import java.sql.Connection;
 
+public class ConnectionManager {
+    private static Connection cn;
+
+    public static Connection getConnection() {
+        return cn;
+    }
 }

@@ -1,8 +1,11 @@
 package by.itClass.controllers;
 
 import by.itClass.constants.Constant;
+import by.itClass.model.services.UserService;
+import by.itClass.model.services.UserServiceImpl;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,6 +15,13 @@ import java.io.IOException;
 
 @WebServlet(name = "AbstractController")
 public abstract class AbstractController extends HttpServlet {
+    protected UserService userService;
+
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        userService = new UserServiceImpl();
+    }
+
     protected void jump(HttpServletRequest request, HttpServletResponse response, String url) throws ServletException, IOException {
         RequestDispatcher rd = request.getRequestDispatcher(url);
         rd.forward(request, response);
