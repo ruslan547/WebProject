@@ -8,6 +8,8 @@ public final class Constant {
     public static final String REGISTRATION_CONT = "/regist";
     public static final String INDEX_JSP = "/index.jsp";
     public static final String REGISTRATION_JSP = "/registration.jsp";
+
+    public static final String LOGIN_CONT = "/login";
     public static final String LOGIN_JSP = "/login.jsp";
 
     public static final String LOGIN = "login";
