@@ -19,4 +19,10 @@ public final class Constant {
     public static final String SURNAME = "surname";
     public static final String AGE = "age";
     public static final String EMAIL = "email";
+
+    public static final String DB_PROPERTIES = "db.properties";
+    public static final String DB_USER_PROPERTY_NAME = "db.user";
+    public static final String DB_PASSWORD_PROPERTY_NAME = "db.password";
+    public static final String DB_URL_PROPERTY_NAME = "db.url";
+    public static final String DB_DRIVER_PROPERTY_NAME = "db.driver";
 }

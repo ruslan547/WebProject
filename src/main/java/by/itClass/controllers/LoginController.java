@@ -19,7 +19,7 @@ public class LoginController extends AbstractController {
         requestData.put(Constant.LOGIN, request.getParameter(Constant.LOGIN));
         requestData.put(Constant.PASSWORD, request.getParameter(Constant.PASSWORD));
 
-        User user = new User(requestData.get(Constant.LOGIN));
+        //User user = new User(requestData.get(Constant.LOGIN));
 
 
     }

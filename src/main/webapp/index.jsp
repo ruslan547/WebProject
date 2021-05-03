@@ -1,4 +1,6 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="by.itClass.constants.Constant" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -10,5 +12,6 @@
 </head>
 <body>
   <h1>Hello Man!</h1>
+  <a href="<c:url value="<%= Constant.REGISTRATION_JSP%>"/>">Registration</a>
 </body>
 </html>
