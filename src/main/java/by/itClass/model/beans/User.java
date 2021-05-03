@@ -1,5 +1,8 @@
 package by.itClass.model.beans;
 
+import by.itClass.constants.Messages;
+import by.itClass.model.exceptions.ServiceException;
+
 public class User {
     private int id;
     private String login;
@@ -9,6 +12,14 @@ public class User {
     private String email;
 
     public User() {
+    }
+
+    public User(String login, String name, String surname, String age, String email) throws ServiceException {
+        this.login = login;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        setAge(age);
     }
 
     public User(int id, String login, String name, String surname, int age, String email) {
@@ -58,6 +69,14 @@ public class User {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public void setAge(String age) throws ServiceException {
+        try {
+            this.age = Integer.parseInt(age);
+        } catch (NumberFormatException e) {
+            throw new ServiceException(e);
+        }
     }
 
     public String getEmail() {

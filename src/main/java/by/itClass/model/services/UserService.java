@@ -1,7 +1,8 @@
 package by.itClass.model.services;
 
 import by.itClass.model.beans.User;
+import by.itClass.model.exceptions.DAOException;
 
 public interface UserService {
-    boolean save(User user, String password);
+    void save(User user, String password) throws DAOException;
 }

@@ -1,9 +1,10 @@
 package by.itClass.model.dao;
 
 import by.itClass.model.beans.User;
+import by.itClass.model.exceptions.DAOException;
 
 import java.sql.SQLException;
 
 public interface UserDAO {
-    boolean save(User user, String password) throws SQLException;
+    void save(User user, String password) throws DAOException;
 }

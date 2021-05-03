@@ -1,12 +1,70 @@
 package by.itClass.model.dao;
 
+import by.itClass.constants.Messages;
+import by.itClass.constants.SQLRequest;
 import by.itClass.model.beans.User;
+import by.itClass.model.db.ConnectionManager;
+import by.itClass.model.exceptions.DAOException;
+import sun.plugin2.message.Message;
 
-import java.sql.SQLException;
+import java.sql.*;
 
 public class UserDAOImpl implements UserDAO {
     @Override
-    public boolean save(User user, String password) throws SQLException {
-        return false;
+    public void save(User user, String password) throws DAOException {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+
+        try {
+            cn = ConnectionManager.getConnection();
+            pst = cn.prepareStatement(SQLRequest.SAVE_USER, Statement.RETURN_GENERATED_KEYS);
+
+            if (!isFoundLogin(user.getLogin())) {
+                pst.setString(1, user.getLogin());
+                pst.setString(2, password);
+                pst.setString(3, user.getName());
+                pst.setString(4, user.getSurname());
+                pst.setInt(5, user.getAge());
+                pst.setString(6, user.getEmail());
+                pst.executeUpdate();
+                rs = pst.getGeneratedKeys();
+                if (rs.next()) {
+                   int id = rs.getInt(1);
+                   user.setId(id);
+                }
+            } else {
+                throw new DAOException(Messages.USER_IS_FOUND);
+            }
+
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        } finally {
+            ConnectionManager.closeStatement(pst);
+            ConnectionManager.closeConnection();
+        }
+    }
+
+    private synchronized boolean isFoundLogin(String login) throws DAOException {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        boolean isFound = false;
+
+        try {
+            cn = ConnectionManager.getConnection();
+            pst = cn.prepareStatement(SQLRequest.FOUND_LOGIN);
+            pst.setString(1, login);
+            rs = pst.executeQuery();
+            isFound = rs.next();
+
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        } finally {
+            ConnectionManager.closeResultSet(rs);
+            ConnectionManager.closeStatement(pst);
+        }
+
+        return isFound;
     }
 }
