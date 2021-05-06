@@ -13,10 +13,10 @@
 <body>
     <div class="container">
         <h2>Login</h2>
-        <form id="loginForm" method="post" action="<c:url value="<%= Constant.LOGIN_CONT%>>"/>">
-            <input type="text" name="<%= Constant.LOGIN%>" placeholder="Login">
-            <input type="text" name="<%= Constant.PASSWORD%>" placeholder="Password">
-            <input type="submit" value="login">
+        <form id="loginForm" method="post" action="<c:url value="<%= Constant.LOGIN_CONT%>"/>">
+            <input type="text" name="<%= Constant.LOGIN%>" placeholder="Login"/>
+            <input type="text" name="<%= Constant.PASSWORD%>" placeholder="Password"/>
+            <input type="submit" value="login"/>
         </form>
     </div>
 </body>

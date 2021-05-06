@@ -17,4 +17,9 @@ public class UserServiceImpl implements UserService {
     public void save(User user, String password) throws DAOException {
         userDAO.save(user, password);
     }
+
+    @Override
+    public User get(String login, String password) throws DAOException {
+        return userDAO.get(login, password);
+    }
 }

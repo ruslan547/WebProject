@@ -13,6 +13,7 @@ public final class Constant {
     public static final String LOGIN_JSP = "/login.jsp";
     public static final String HOME_JSP = "/home.jsp";
 
+    public static final String ID = "id";
     public static final String LOGIN = "login";
     public static final String PASSWORD = "password";
     public static final String NAME = "name";

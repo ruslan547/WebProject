@@ -12,6 +12,7 @@
 </head>
 <body>
   <h1>Hello Man!</h1>
+  <a href="<c:url value="<%= Constant.LOGIN_JSP%>"/>">Login</a>
   <a href="<c:url value="<%= Constant.REGISTRATION_JSP%>"/>">Registration</a>
 </body>
 </html>

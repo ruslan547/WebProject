@@ -1,11 +1,11 @@
 package by.itClass.model.dao;
 
+import by.itClass.constants.Constant;
 import by.itClass.constants.Messages;
 import by.itClass.constants.SQLRequest;
 import by.itClass.model.beans.User;
 import by.itClass.model.db.ConnectionManager;
 import by.itClass.model.exceptions.DAOException;
-import sun.plugin2.message.Message;
 
 import java.sql.*;
 
@@ -66,5 +66,52 @@ public class UserDAOImpl implements UserDAO {
         }
 
         return isFound;
+    }
+
+    @Override
+    public User get(String login, String password) throws DAOException {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        User user = new User();
+
+        try {
+            if (isFoundLogin(login)) {
+                cn = ConnectionManager.getConnection();
+                pst = cn.prepareStatement(SQLRequest.FOUND_USER);
+                pst.setString(1, login);
+                rs = pst.executeQuery();
+
+                if (rs.next()) {
+                    String resPassword = rs.getString(Constant.PASSWORD);
+
+                    if (password.equals(resPassword)) {
+                        user.setLogin(rs.getString(Constant.LOGIN));
+                        user.setId(rs.getInt(Constant.ID));
+                        user.setName(rs.getString(Constant.NAME));
+                        user.setSurname(rs.getString(Constant.SURNAME));
+                        user.setAge(rs.getInt(Constant.AGE));
+                        user.setEmail(rs.getString(Constant.EMAIL));
+                    } else {
+                        throw new DAOException(Messages.PASSWORD_INCORRECT);
+                    }
+
+                } else {
+                    throw new DAOException(Messages.USER_NOT_FOUND);
+                }
+
+
+            } else {
+                throw new DAOException(Messages.USER_NOT_FOUND);
+            }
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        } finally {
+            ConnectionManager.closeResultSet(rs);
+            ConnectionManager.closeStatement(pst);
+            ConnectionManager.closeConnection();
+        }
+
+        return user;
     }
 }

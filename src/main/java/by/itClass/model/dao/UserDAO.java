@@ -7,4 +7,5 @@ import java.sql.SQLException;
 
 public interface UserDAO {
     void save(User user, String password) throws DAOException;
+    User get(String login, String password) throws DAOException;
 }

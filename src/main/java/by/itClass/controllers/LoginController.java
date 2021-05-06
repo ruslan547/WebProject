@@ -2,6 +2,7 @@ package by.itClass.controllers;
 
 import by.itClass.constants.Constant;
 import by.itClass.model.beans.User;
+import by.itClass.model.exceptions.DAOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,7 +20,15 @@ public class LoginController extends AbstractController {
         requestData.put(Constant.LOGIN, request.getParameter(Constant.LOGIN));
         requestData.put(Constant.PASSWORD, request.getParameter(Constant.PASSWORD));
 
-        //User user = new User(requestData.get(Constant.LOGIN));
+
+        try {
+            User user = userService.get(requestData.get(Constant.LOGIN), requestData.get(Constant.PASSWORD));
+            request.setAttribute(Constant.USER, user);
+            jump(request, response, Constant.HOME_JSP);
+        } catch (DAOException e) {
+            jumpMessage(request, response, e.getMessage(), Constant.LOGIN_JSP);
+            e.printStackTrace();
+        }
 
 
     }
