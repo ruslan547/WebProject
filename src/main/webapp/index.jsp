@@ -11,8 +11,9 @@
   <title>Web Project</title>
 </head>
 <body>
-  <h1>Hello Man!</h1>
+  <h1>Hello ${user.login}</h1>
   <a href="<c:url value="<%= Constant.LOGIN_JSP%>"/>">Login</a>
   <a href="<c:url value="<%= Constant.REGISTRATION_JSP%>"/>">Registration</a>
+  <a href="<c:url value="<%= Constant.LOGOUT_CONT%>"/>">Logout</a>
 </body>
 </html>

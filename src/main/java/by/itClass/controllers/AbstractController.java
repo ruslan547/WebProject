@@ -31,4 +31,13 @@ public abstract class AbstractController extends HttpServlet {
         request.setAttribute(Constant.MESSAGE, message);
         jump(request, response, url);
     }
+
+    protected void redirect(HttpServletRequest request, HttpServletResponse response, String url) throws IOException {
+        //method getContextPath return the name of the context
+        response.sendRedirect(request.getContextPath() + url); // web/url
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doPost(request, response);
+    }
 }

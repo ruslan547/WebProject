@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Enumeration;
 
@@ -26,15 +27,12 @@ public class RegistrationController extends AbstractController {
         try {
             User user = new User(login, name, surname, age, email);
             userService.save(user, password);
-            request.setAttribute(Constant.USER, user);
-            jump(request, response, Constant.HOME_JSP);
+            HttpSession session = request.getSession();
+            session.setAttribute(Constant.USER, user);
+            redirect(request, response, Constant.HOME_JSP);
         } catch (ServiceException | DAOException e) {
-            jumpMessage(request, response, e.getMessage(), Constant.REGISTRATION_JSP);
+            jumpMessage(request, response, Constant.REGISTRATION_JSP, e.getMessage());
             e.printStackTrace();
         }
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doPost(request, response);
     }
 }

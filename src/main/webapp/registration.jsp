@@ -13,6 +13,9 @@
 <body>
   <div class="container">
     <h2>Registration</h2>
+    <c:if test="${not empty message}">
+      <p style="color: red">${message}</p>
+    </c:if>
     <form id="registForm" method="post" action="<c:url value="<%= Constant.REGISTRATION_CONT%>"/>">
       <input type="text" name="<%= Constant.LOGIN%>" placeholder="Login"/>
       <input type="password" name="<%= Constant.PASSWORD%>" placeholder="password">

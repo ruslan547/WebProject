@@ -6,6 +6,6 @@ public final class SQLRequest {
     public static final String FOUND_LOGIN =
             "select id from users where login=?";
 
-    public static final String FOUND_USER =
-            "select * from users where login=?";
+    public static final String GET_USER =
+            "select * from users where login=? and password=?";
 }

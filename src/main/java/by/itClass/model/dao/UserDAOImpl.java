@@ -73,34 +73,26 @@ public class UserDAOImpl implements UserDAO {
         Connection cn = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
-        User user = new User();
+        User user = null;
 
         try {
             if (isFoundLogin(login)) {
                 cn = ConnectionManager.getConnection();
-                pst = cn.prepareStatement(SQLRequest.FOUND_USER);
+                pst = cn.prepareStatement(SQLRequest.GET_USER);
                 pst.setString(1, login);
+                pst.setString(2, password);
                 rs = pst.executeQuery();
 
                 if (rs.next()) {
-                    String resPassword = rs.getString(Constant.PASSWORD);
+                    int id = rs.getInt(Constant.ID);
+                    String name = rs.getString(Constant.NAME);
+                    String surname = rs.getString(Constant.NAME);
+                    int age = rs.getInt(Constant.AGE);
+                    String email = rs.getString(Constant.EMAIL);
 
-                    if (password.equals(resPassword)) {
-                        user.setLogin(rs.getString(Constant.LOGIN));
-                        user.setId(rs.getInt(Constant.ID));
-                        user.setName(rs.getString(Constant.NAME));
-                        user.setSurname(rs.getString(Constant.SURNAME));
-                        user.setAge(rs.getInt(Constant.AGE));
-                        user.setEmail(rs.getString(Constant.EMAIL));
-                    } else {
-                        throw new DAOException(Messages.PASSWORD_INCORRECT);
-                    }
+                    user = new User(id, login, name, surname, age, email);
 
-                } else {
-                    throw new DAOException(Messages.USER_NOT_FOUND);
                 }
-
-
             } else {
                 throw new DAOException(Messages.USER_NOT_FOUND);
             }
