@@ -1,9 +1,10 @@
-package by.itClass.model.dao;
+package by.itClass.model.dao.impl;
 
 import by.itClass.constants.Constant;
 import by.itClass.constants.Messages;
 import by.itClass.constants.SQLRequest;
 import by.itClass.model.beans.User;
+import by.itClass.model.dao.interfaces.UserDAO;
 import by.itClass.model.db.ConnectionManager;
 import by.itClass.model.exceptions.DAOException;
 

@@ -1,9 +1,10 @@
-package by.itClass.model.services;
+package by.itClass.model.services.impl;
 
 import by.itClass.model.beans.User;
-import by.itClass.model.dao.UserDAO;
-import by.itClass.model.dao.UserDAOImpl;
+import by.itClass.model.dao.interfaces.UserDAO;
+import by.itClass.model.dao.impl.UserDAOImpl;
 import by.itClass.model.exceptions.DAOException;
+import by.itClass.model.services.interfaces.UserService;
 
 public class UserServiceImpl implements UserService {
     private UserDAO userDAO;

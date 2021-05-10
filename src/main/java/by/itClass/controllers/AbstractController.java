@@ -1,8 +1,10 @@
 package by.itClass.controllers;
 
 import by.itClass.constants.Constant;
-import by.itClass.model.services.UserService;
-import by.itClass.model.services.UserServiceImpl;
+import by.itClass.model.services.impl.EventServiceImpl;
+import by.itClass.model.services.interfaces.EventService;
+import by.itClass.model.services.interfaces.UserService;
+import by.itClass.model.services.impl.UserServiceImpl;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -16,10 +18,12 @@ import java.io.IOException;
 @WebServlet(name = "AbstractController")
 public abstract class AbstractController extends HttpServlet {
     protected UserService userService;
+    protected EventService eventService;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         userService = new UserServiceImpl();
+        eventService = new EventServiceImpl();
     }
 
     protected void jump(HttpServletRequest request, HttpServletResponse response, String url) throws ServletException, IOException {
