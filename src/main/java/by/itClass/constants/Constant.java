@@ -3,6 +3,8 @@ package by.itClass.constants;
 public final class Constant {
     public static final String MESSAGE = "message";
     public static final String USER = "user";
+    public static final String EVENTS = "events";
+
 
     public static final String REGISTRATION_CONT = "/regist";
     public static final String LOGOUT_CONT = "/logout";

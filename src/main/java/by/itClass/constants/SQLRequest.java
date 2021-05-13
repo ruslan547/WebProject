@@ -14,14 +14,14 @@ public final class SQLRequest {
             "events.desc," +
             "events.place," +
             "events.date," +
-            "concat_ws(users.name,users.surname) as author" +
+            "concat_ws(' ',users.name,users.surname) as author" +
             " from events " +
             "join users on events.idUser = users.id ";
     public static final String WHERE_TODAY = "where date=curdate()";
-    public static final String WHERE_TOMORROW = "";
-    public static final String WHERE_SOON = "";
-    public static final String WHERE_FINISHED = "";
+    public static final String WHERE_TOMORROW = "where date=date_add(curdate(), interval 1 day)";
+    public static final String WHERE_SOON = "where date>date_add(curdate(), interval 1 day)";
+    public static final String WHERE_FINISHED = "where date<curdate()";
     public static final String WHERE_ALL = "";
-    public static final String WHERE_HOME = "";
+    public static final String WHERE_HOME = "where idUser=?";
 
 }

@@ -3,12 +3,12 @@ package by.itClass.model.enums;
 import by.itClass.constants.SQLRequest;
 
 public enum SectionMenu {
-    HOME(SQLRequest.WHERE_TODAY),
-    TODAY(SQLRequest.WHERE_TOMORROW),
-    TOMORROW(SQLRequest.WHERE_SOON),
-    SOON(SQLRequest.WHERE_FINISHED),
-    FINISHED(SQLRequest.WHERE_ALL),
-    ALL(SQLRequest.WHERE_HOME);
+    HOME(SQLRequest.WHERE_HOME),
+    TODAY(SQLRequest.WHERE_TODAY),
+    TOMORROW(SQLRequest.WHERE_TOMORROW),
+    SOON(SQLRequest.WHERE_SOON),
+    FINISHED(SQLRequest.WHERE_FINISHED),
+    ALL(SQLRequest.WHERE_ALL);
 
     private String sql;
     private SectionMenu(String sql) {

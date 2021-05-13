@@ -5,6 +5,7 @@ import by.itClass.model.beans.Event;
 import by.itClass.model.dao.interfaces.EventDAO;
 import by.itClass.model.db.ConnectionManager;
 import by.itClass.model.enums.SectionMenu;
+import by.itClass.model.exceptions.DAOException;
 import com.sun.org.apache.bcel.internal.Const;
 
 import java.sql.*;
@@ -13,19 +14,42 @@ import java.util.List;
 
 public class EventDAOImpl implements EventDAO {
     @Override
-    public List<Event> getList(SectionMenu section) {
-        Connection cn = null;
-        PreparedStatement pst = null;
-        ResultSet rs = null;
+    public List<Event> getList(SectionMenu section) throws DAOException {
+        List<Event> events = null;
 
-        List<Event> events = new ArrayList<>();
-        String sql = section.getSql();
+        try (Connection cn = ConnectionManager.getConnection();
+            PreparedStatement pst = cn.prepareStatement(section.getSql())
+        ) {
+            events = getList(pst);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
-        try {
-            cn = ConnectionManager.getConnection();
-            pst = cn.prepareStatement(sql);
-            pst.executeQuery();
+        return events;
+    }
 
+    @Override
+    public List<Event> getList(int idUser) throws DAOException {
+        SectionMenu section = SectionMenu.HOME;
+        List<Event> events = null;
+
+        try (Connection cn = ConnectionManager.getConnection();
+             PreparedStatement pst = cn.prepareStatement(section.getSql())) {
+            pst.setInt(1, idUser);
+            events = getList(pst);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DAOException(e);
+        }
+
+        return events;
+    }
+
+    private List<Event> getList(PreparedStatement pst) throws SQLException {
+       List<Event> events = new ArrayList<>();
+       Connection cn = ConnectionManager.getConnection();
+
+        try (ResultSet rs = pst.executeQuery()) {
             while (rs.next()) {
                 int id = rs.getInt(Constant.ID);
                 String title = rs.getString(Constant.TITLE);
@@ -36,13 +60,7 @@ public class EventDAOImpl implements EventDAO {
 
                 events.add(new Event(id, title, desc, place, date, author));
             }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            // TO DO
         }
-
 
         return events;
     }

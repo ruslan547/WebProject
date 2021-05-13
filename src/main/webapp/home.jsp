@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -14,5 +15,30 @@
   <p>${user.login}</p>
   <p>${user.age}</p>
   <p>${user.email}</p>
+
+  <div class="events_container">
+    <table>
+      <tr>
+        <th>id</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Place</th>
+        <th>Date</th>
+        <th>Author</th>
+        <th></th>
+      </tr>
+
+      <c:forEach var="event" items="${events}">
+        <tr>
+          <td>${event.id}</td>
+          <td>${event.title}</td>
+          <td>${event.desc}</td>
+          <td>${event.place}</td>
+          <td>${event.date}</td>
+          <td>${event.author}</td>
+        </tr>
+      </c:forEach>
+    </table>
+  </div>
 </body>
 </html>
