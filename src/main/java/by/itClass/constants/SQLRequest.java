@@ -11,7 +11,7 @@ public final class SQLRequest {
     public static final String GET_EVENTS = "select " +
             "events.id," +
             "events.title," +
-            "events.desc," +
+            "events.descr," +
             "events.place," +
             "events.date," +
             "concat_ws(' ',users.name,users.surname) as author" +
@@ -24,4 +24,5 @@ public final class SQLRequest {
     public static final String WHERE_ALL = "";
     public static final String WHERE_HOME = "where idUser=?";
 
+    public static final String ADD_EVENT = "insert into events(idUser,title,descr,place,date) values(?,?,?,?,?)";
 }

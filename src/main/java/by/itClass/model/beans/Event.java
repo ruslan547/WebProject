@@ -1,10 +1,16 @@
 package by.itClass.model.beans;
 
+import by.itClass.constants.Constant;
+import by.itClass.model.exceptions.ServiceException;
+
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class Event {
     private int id;
+    private int idUser;
     private String title;
     private String desc;
     private String place;
@@ -13,6 +19,13 @@ public class Event {
     private List<Program> programs;
 
     public Event() {
+    }
+
+    public Event(String title, String desc, String place, String date) throws ServiceException {
+        this.title = title;
+        this.desc = desc;
+        this.place = place;
+        setDate(date);
     }
 
     public Event(int id, String title, String desc, String place, Date date, String author) {
@@ -62,6 +75,15 @@ public class Event {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public void setDate(String date) throws ServiceException {
+        SimpleDateFormat formatter = new SimpleDateFormat(Constant.DATE_PATTERN);
+        try {
+            this.date = new Date(formatter.parse(date).getTime());
+        } catch (ParseException e) {
+            throw new ServiceException(e);
+        }
     }
 
     public String getAuthor() {

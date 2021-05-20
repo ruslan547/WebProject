@@ -1,6 +1,7 @@
 package by.itClass.model.dao.impl;
 
 import by.itClass.constants.Constant;
+import by.itClass.constants.SQLRequest;
 import by.itClass.model.beans.Event;
 import by.itClass.model.dao.interfaces.EventDAO;
 import by.itClass.model.db.ConnectionManager;
@@ -23,6 +24,7 @@ public class EventDAOImpl implements EventDAO {
             events = getList(pst);
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new DAOException(e);
         }
 
         return events;
@@ -43,6 +45,33 @@ public class EventDAOImpl implements EventDAO {
         }
 
         return events;
+    }
+
+    @Override
+    public void add(Event event, int idUser) throws DAOException {
+        ResultSet rs = null;
+
+        try (Connection cn = ConnectionManager.getConnection();
+             PreparedStatement pst = cn.prepareStatement(SQLRequest.ADD_EVENT, Statement.RETURN_GENERATED_KEYS)) {
+            pst.setInt(1, idUser);
+            pst.setString(2, event.getTitle());
+            pst.setString(3, event.getDesc());
+            pst.setString(4, event.getPlace());
+            pst.setDate(5, event.getDate());
+            System.out.println(pst);
+            if (pst.executeUpdate() > 0) {
+                rs = pst.getGeneratedKeys();
+                if (rs.next()) {
+                    int id = rs.getInt(1);
+                    // Save program
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DAOException(e);
+        } finally {
+            ConnectionManager.closeResultSet(rs);
+        }
     }
 
     private List<Event> getList(PreparedStatement pst) throws SQLException {

@@ -25,4 +25,9 @@ public class EventServiceImpl implements EventService {
     public List<Event> getList(int idUser) throws DAOException {
         return eventDAO.getList(idUser);
     }
+
+    @Override
+    public void add(Event event, int idUser) throws DAOException {
+        eventDAO.add(event, idUser);
+    }
 }

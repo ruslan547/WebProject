@@ -9,4 +9,5 @@ import java.util.List;
 public interface EventDAO {
     List<Event> getList(SectionMenu section) throws DAOException;
     List<Event> getList(int idUser) throws DAOException;
+    void add(Event event, int idUser) throws DAOException;
 }

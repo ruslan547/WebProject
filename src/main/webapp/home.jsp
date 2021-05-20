@@ -1,3 +1,4 @@
+<%@ page import="by.itClass.constants.Constant" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!doctype html>
@@ -40,5 +41,9 @@
       </c:forEach>
     </table>
   </div>
+
+  <a href="<c:url value="<%= Constant.NEW_EVENT_JSP%>"/>">New event</a>
+  <a href="#">Edit event</a>
+  <a href="#">Delete event</a>
 </body>
 </html>
