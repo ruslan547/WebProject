@@ -13,7 +13,6 @@ public class UserServiceImpl implements UserService {
         userDAO = new UserDAOImpl();
     }
 
-
     @Override
     public void save(User user, String password) throws DAOException {
         userDAO.save(user, password);

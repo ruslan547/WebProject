@@ -8,18 +8,18 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Login page</title>
+    <title>Document</title>
   </head>
   <body>
-    <c:import url="subpages/message.jsp"/>
-    <div class="container">
-      <h2>Login</h2>
-
-      <form method="post" action="<c:url value="<%= Constant.LOGIN_CONT %>" />">
-        <input type="text" name="<%= Constant.LOGIN %>" placeholder="Login">
-        <input type="password" name="<%= Constant.PASSWORD %>" placeholder="Password">
-        <input type="submit" value="Login">
-      </form>
-    </div>
+  <c:import url="subpages/message.jsp"/>
+    <h2>Event: ${event.title}</h2>
+    <h3>Description</h3>
+    <p>${event.descr}</p>
+    <h3>Place</h3>
+    <p>${event.place}</p>
+    <h3>Date</h3>
+    <p>${event.date}</p>
+    <h3>Author</h3>
+    <p>${event.author}</p>
   </body>
 </html>

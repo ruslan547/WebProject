@@ -5,8 +5,10 @@ import by.itClass.model.dao.impl.EventDAOImpl;
 import by.itClass.model.dao.interfaces.EventDAO;
 import by.itClass.model.enums.SectionMenu;
 import by.itClass.model.exceptions.DAOException;
+import by.itClass.model.exceptions.ServiceException;
 import by.itClass.model.services.interfaces.EventService;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class EventServiceImpl implements EventService {
@@ -29,5 +31,26 @@ public class EventServiceImpl implements EventService {
     @Override
     public void add(Event event, int idUser) throws DAOException {
         eventDAO.add(event, idUser);
+    }
+
+    @Override
+    public void delete(String[] ids) throws DAOException {
+
+        eventDAO.delete(ids);
+    }
+
+    @Override
+    public Event get(String id) throws DAOException, ServiceException {
+
+        try {
+            int idEvent = Integer.parseInt(id);
+            return eventDAO.get(idEvent);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            throw new ServiceException(e);
+        }
+
+
+
     }
 }

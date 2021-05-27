@@ -1,4 +1,3 @@
-
 <%@ page import="by.itClass.constants.Constant" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -13,18 +12,22 @@
 </head>
 <body>
   <h2>Event form</h2>
-  <form method="post" action="<c:url value="<%= Constant.ADD_EVENT_CONT%>"/>">
-    <input type="text" name="<%= Constant.TITLE %>" placeholder="Title"/>
-    <input type="text" name="<%= Constant.DESC %>" placeholder="Description"/>
-    <input type="text" name="<%= Constant.PLACE %>" placeholder="Place"/>
-    <input type="date" name="<%= Constant.DATE %>" placeholder="Date"/>
-    <br>
-    <input type="text" name="<%= Constant.PR_TITLE%>" placeholder="Title">
-    <input type="time" name="<%= Constant.PR_TIME%>" placeholder="Time">
-    <input type="submit" value="Create" />
+  <form id="addProgramForm" method="post" action="<c:url value="<%= Constant.ADD_EVENT_CONT%>"/>">
+    <input type="text" name="<%= Constant.TITLE %>" placeholder="Title">
+    <input type="text" name="<%= Constant.DESCR %>" placeholder="Description">
+    <input type="text" name="<%= Constant.PLACE %>" placeholder="Place">
+    <input type="date" name="<%= Constant.DATE %>" placeholder="Date">
+    <br><br>
+    <div id="program_cont">
+      <input id="pr_title" type="text" name="<%= Constant.PR_TITLE %>" placeholder="Title">
+      <input id="pr_time" type="time" name="<%= Constant.PR_TIME %>" placeholder="Time">
+
+    </div>
+    <input id="add_btn" type="submit" value="Create">
   </form>
 
-  <a href="#">Add program</a>
-  <a href="#">Remove program</a>
+  <a href="JavaScript:addProgram()">Add program</a>
+  <a href="JavaScript:removeProgram()">Remove program</a>
+  <script src="js/main.js"></script>
 </body>
 </html>

@@ -1,13 +1,13 @@
-package by.itClass.controllers;
+package by.itClass.controllers.user;
 
 import by.itClass.constants.Constant;
 import by.itClass.constants.Messages;
+import by.itClass.controllers.abstracts.AbstractController;
 import by.itClass.model.beans.User;
 import by.itClass.model.exceptions.DAOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;

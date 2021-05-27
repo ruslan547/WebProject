@@ -1,19 +1,17 @@
-package by.itClass.controllers;
+package by.itClass.controllers.user;
 
 import by.itClass.constants.Constant;
+import by.itClass.controllers.abstracts.AbstractController;
 import by.itClass.model.beans.User;
 import by.itClass.model.exceptions.DAOException;
 import by.itClass.model.exceptions.ServiceException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Enumeration;
-import java.util.Map;
 
 @WebServlet(name = "registration", urlPatterns = {Constant.REGISTRATION_CONT})
 public class RegistrationController extends AbstractController {

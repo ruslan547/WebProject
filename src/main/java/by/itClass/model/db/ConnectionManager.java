@@ -14,15 +14,15 @@ public class ConnectionManager {
 
     static {
         try (InputStream in = Thread.currentThread()
-                .getContextClassLoader()
-                .getResourceAsStream(Constant.DB_PROPERTIES)) {
+                             .getContextClassLoader()
+                             .getResourceAsStream(Constant.DB_PROPERTIES)) {
             properties = new Properties();
             properties.load(in);
 
+            System.out.println(properties.getProperty(Constant.DB_DRIVER_PROPERTY_NAME));
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     static {
@@ -36,8 +36,9 @@ public class ConnectionManager {
     public static Connection getConnection() throws SQLException {
         if (Objects.isNull(cn) || cn.isClosed()) {
             cn = DriverManager.getConnection(properties.getProperty(Constant.DB_URL_PROPERTY_NAME),
-                    properties.getProperty(Constant.DB_USER_PROPERTY_NAME),
-                    properties.getProperty(Constant.DB_PASSWORD_PROPERTY_NAME));
+                                            properties.getProperty(Constant.DB_USER_PROPERTY_NAME),
+                                            properties.getProperty(Constant.DB_PASSWORD_PROPERTY_NAME));
+            System.out.println("Connection:" + cn);
         }
         return cn;
     }

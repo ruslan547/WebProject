@@ -2,13 +2,14 @@ package by.itClass.model.exceptions;
 
 public class ServiceException extends Exception {
     public ServiceException() {
-    }
-
-    public ServiceException(String message, Throwable cause) {
-        super(message, cause);
+        super();
     }
 
     public ServiceException(Throwable cause) {
         super(cause);
+    }
+
+    public ServiceException(String message, Throwable cause) {
+        super(message, cause);
     }
 }

@@ -31,10 +31,6 @@ public class User {
         this.email = email;
     }
 
-    public User(String login) {
-        this.login = login;
-    }
-
     public int getId() {
         return id;
     }

@@ -1,4 +1,4 @@
-package by.itClass.controllers;
+package by.itClass.controllers.abstracts;
 
 import by.itClass.constants.Constant;
 import by.itClass.model.services.impl.EventServiceImpl;

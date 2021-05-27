@@ -31,13 +31,12 @@ public class UserDAOImpl implements UserDAO {
                 pst.executeUpdate();
                 rs = pst.getGeneratedKeys();
                 if (rs.next()) {
-                   int id = rs.getInt(1);
-                   user.setId(id);
+                    int id = rs.getInt(1);
+                    user.setId(id);
                 }
             } else {
-                throw new DAOException(Messages.USER_IS_FOUND);
+              throw new DAOException(Messages.USER_IS_FOUND);
             }
-
         } catch (SQLException e) {
             throw new DAOException(e);
         } finally {
@@ -58,16 +57,15 @@ public class UserDAOImpl implements UserDAO {
             pst.setString(1, login);
             rs = pst.executeQuery();
             isFound = rs.next();
-
         } catch (SQLException e) {
             throw new DAOException(e);
         } finally {
             ConnectionManager.closeResultSet(rs);
             ConnectionManager.closeStatement(pst);
         }
-
         return isFound;
     }
+
 
     @Override
     public User get(String login, String password) throws DAOException {
@@ -77,25 +75,18 @@ public class UserDAOImpl implements UserDAO {
         User user = null;
 
         try {
-            if (isFoundLogin(login)) {
-                cn = ConnectionManager.getConnection();
-                pst = cn.prepareStatement(SQLRequest.GET_USER);
-                pst.setString(1, login);
-                pst.setString(2, password);
-                rs = pst.executeQuery();
-
-                if (rs.next()) {
-                    int id = rs.getInt(Constant.ID);
-                    String name = rs.getString(Constant.NAME);
-                    String surname = rs.getString(Constant.NAME);
-                    int age = rs.getInt(Constant.AGE);
-                    String email = rs.getString(Constant.EMAIL);
-
-                    user = new User(id, login, name, surname, age, email);
-
-                }
-            } else {
-                throw new DAOException(Messages.USER_NOT_FOUND);
+            cn = ConnectionManager.getConnection();
+            pst = cn.prepareStatement(SQLRequest.GET_USER);
+            pst.setString(1, login);
+            pst.setString(2, password);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                int id = rs.getInt(Constant.ID);
+                String name = rs.getString(Constant.NAME);
+                String surname = rs.getString(Constant.SURNAME);
+                int age = rs.getInt(Constant.AGE);
+                String email = rs.getString(Constant.EMAIL);
+                user = new User(id, login, name, surname, age, email);
             }
         } catch (SQLException e) {
             throw new DAOException(e);
@@ -104,7 +95,10 @@ public class UserDAOImpl implements UserDAO {
             ConnectionManager.closeStatement(pst);
             ConnectionManager.closeConnection();
         }
-
         return user;
     }
+
 }
+
+
+
